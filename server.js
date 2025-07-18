@@ -246,16 +246,15 @@ app.post("/countVowels", (req, res) => {
 });
 
 app.post("/randomInteger/:a/:b", (req, res) => {
-  let a = +(req.params.a);
-    let b = +(req.params.b);
-    
-    if(a > b) return res.send('Choose correct numbers')
+  let a = +req.params.a;
+  let b = +req.params.b;
+
+  if (a > b) return res.send("Choose correct numbers");
 
   let result = Math.floor(Math.random() * (b - a + 1) + a);
 
   res.send(result);
 });
-
 
 app.listen(3000, () => {
   console.log("server is runing on port : 3000");
