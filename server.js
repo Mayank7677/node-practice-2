@@ -1,7 +1,20 @@
 const express = require("express");
 const app = express();
+const multer = require("multer");
+const uploadFile = require("./services/storage.services");
 
 app.use(express.json());
+let upload = multer({ storage: multer.memoryStorage() });
+
+app.post("/create", upload.single("image"), async (req, res) => {
+  console.log(req.body);
+  console.log(req.file);
+
+  const uploadedFile = await uploadFile(req.file);
+  console.log({ uploadedFile });
+
+  res.send(uploadedFile);
+});
 
 app.get("/", (req, res) => {
   res.send("Working");
